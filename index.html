@@ -8,88 +8,108 @@
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&family=JetBrains+Mono:wght@400;700&family=Caveat:wght@700&display=swap" rel="stylesheet">
 <style>
   *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root { --beige: #f5f1eb; --green: #2d6a4f; --gl: #52b788; --dark: #1a1a1a; --acc: #e76f51; --yel: #f4d03f; --blu: #4a90d9; }
-  body { background: var(--dark); font-family: 'Inter', sans-serif; overflow: hidden; }
+  :root {
+    --beige: #f5f1eb;
+    --green: #2d6a4f;
+    --gl: #52b788;
+    --dark: #1a1a2e;
+    --acc: #e63946;
+    --yel: #e9a82e;
+    --border: #c8c0b4;
+    --card: #ffffff;
+    --muted: #888;
+    --body: rgba(26,26,46,0.7);
+  }
+  body {
+    background-color: var(--beige);
+    background-image: radial-gradient(circle, #c4bdb5 1px, transparent 1px);
+    background-size: 28px 28px;
+    font-family: 'Inter', sans-serif;
+    overflow: hidden;
+  }
   .deck { width: 100vw; height: 100vh; position: relative; }
   .slide { position: absolute; inset: 0; display: none; flex-direction: column; justify-content: center; align-items: flex-start; padding: 80px 100px; opacity: 0; transition: opacity 0.3s ease; }
   .slide.active { display: flex; }
   .slide.visible { opacity: 1; }
-  .bg-d { background: var(--dark); }
-  .bg-dd { background: #111; }
-  .bg-g { background: var(--green); }
-  .bg-dp { background: #0f1a14; border-left: 6px solid var(--gl); }
-  .bg-r { background: #1a0f0f; }
-  .bg-n { background: #0d1117; }
-  .bg-lyr { background: #0a0f1a; }
-  .bg-demo { background: #050f0a; border: 1px solid rgba(82,183,136,0.2); }
-  .label { font-family: 'JetBrains Mono', monospace; font-size: 13px; font-weight: 700; letter-spacing: 0.15em; text-transform: uppercase; color: var(--gl); margin-bottom: 24px; }
-  .la { color: var(--acc); } .lb { color: var(--blu); } .ly { color: var(--yel); }
-  h1 { font-size: clamp(36px, 4.8vw, 68px); font-weight: 900; line-height: 1.05; color: var(--beige); margin-bottom: 28px; }
-  h2 { font-size: clamp(26px, 3.6vw, 52px); font-weight: 900; line-height: 1.1; color: var(--beige); margin-bottom: 24px; }
-  h3 { font-size: clamp(20px, 2.5vw, 34px); font-weight: 700; color: var(--beige); margin-bottom: 16px; }
-  p { font-size: clamp(14px, 1.75vw, 21px); line-height: 1.6; color: rgba(245,241,235,0.8); max-width: 840px; margin-bottom: 14px; }
-  .hi { color: var(--gl); } .ha { color: var(--acc); } .hy { color: var(--yel); } .hb { color: var(--blu); }
-  .name { color: var(--yel); font-weight: 700; }
-  .mono { font-family: 'JetBrains Mono', monospace; background: rgba(82,183,136,0.15); border: 1px solid rgba(82,183,136,0.3); color: var(--gl); padding: 2px 9px; border-radius: 4px; font-size: 0.85em; }
-  ul.list { list-style: none; margin-top: 8px; }
-  ul.list li { font-size: clamp(13px, 1.6vw, 19px); color: rgba(245,241,235,0.85); padding: 9px 0; border-bottom: 1px solid rgba(255,255,255,0.06); display: flex; align-items: flex-start; gap: 14px; line-height: 1.5; }
+  .bg-base { background-color: var(--beige); background-image: radial-gradient(circle, #c4bdb5 1px, transparent 1px); background-size: 28px 28px; }
+  .bg-white { background: #fff; }
+  .bg-green { background: var(--green); }
+  .label { font-family: 'JetBrains Mono', monospace; font-size: 12px; font-weight: 700; letter-spacing: 0.18em; text-transform: uppercase; color: var(--muted); margin-bottom: 28px; }
+  .label-g { color: var(--gl); }
+  .label-a { color: var(--acc); }
+  .name { color: var(--green); font-weight: 700; }
+  h1 { font-size: clamp(34px,4.8vw,64px); font-weight: 900; line-height: 1.05; color: var(--dark); margin-bottom: 24px; }
+  h2 { font-size: clamp(26px,3.6vw,50px); font-weight: 900; line-height: 1.1; color: var(--dark); margin-bottom: 20px; }
+  h3 { font-size: clamp(20px,2.5vw,34px); font-weight: 700; color: var(--dark); margin-bottom: 16px; }
+  p { font-size: clamp(15px,1.75vw,21px); line-height: 1.65; color: var(--body); max-width: 840px; margin-bottom: 14px; }
+  .hi { color: var(--green); font-weight: 700; }
+  .ha { color: var(--acc); font-weight: 700; }
+  .hy { color: var(--yel); font-weight: 700; }
+  .card { background: var(--card); border: 2px solid var(--border); border-radius: 8px; padding: 22px 26px; }
+  .card h4 { font-size: 16px; font-weight: 700; color: var(--dark); margin-bottom: 8px; }
+  .card p { font-size: 14px; margin-bottom: 0; }
+  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; width: 100%; max-width: 1060px; }
+  ul.list { list-style: none; margin-top: 8px; max-width: 900px; }
+  ul.list li { font-size: clamp(14px,1.65vw,20px); color: var(--body); padding: 10px 0; border-bottom: 1px solid rgba(26,26,46,0.08); display: flex; align-items: flex-start; gap: 14px; line-height: 1.5; }
   ul.list li:last-child { border-bottom: none; }
-  ul.list li .ic { color: var(--gl); flex-shrink: 0; margin-top: 2px; }
-  .grid2 { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; width: 100%; max-width: 1100px; }
-  .card { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 12px; padding: 22px 26px; }
-  .card h4 { font-size: 16px; font-weight: 700; color: var(--beige); margin-bottom: 8px; }
-  .card p { font-size: 13px; margin-bottom: 0; }
-  .layer-num { font-family: 'Inter'; font-size: clamp(90px,13vw,160px); font-weight: 900; color: rgba(82,183,136,0.08); position: absolute; right: 80px; top: 50%; transform: translateY(-50%); line-height: 1; pointer-events: none; }
-  .stats { display: flex; gap: 32px; flex-wrap: wrap; margin-top: 20px; }
-  .stat .num { font-size: clamp(32px,4.5vw,60px); font-weight: 900; color: var(--gl); line-height: 1; }
-  .stat .lbl { font-size: 13px; color: rgba(245,241,235,0.55); margin-top: 4px; }
-  .quote { border-left: 4px solid var(--acc); padding: 14px 22px; background: rgba(231,111,81,0.06); border-radius: 0 8px 8px 0; margin: 16px 0; max-width: 900px; }
-  .quote p { font-style: italic; color: var(--beige); margin-bottom: 0; font-size: clamp(13px,1.65vw,19px); }
-  .quote .attr { font-style: normal; font-size: 12px; color: var(--acc); margin-top: 8px; font-family: 'JetBrains Mono', monospace; display: block; }
-  /* Demo */
-  .demo-box { background: rgba(0,0,0,0.7); border: 1px solid rgba(82,183,136,0.4); border-radius: 14px; padding: 22px 28px; max-width: 760px; margin-top: 14px; }
-  .demo-box .prompt { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: rgba(245,241,235,0.45); margin-bottom: 10px; }
+  ul.list li .ic { color: var(--green); flex-shrink: 0; margin-top: 2px; font-weight: 700; }
+  ul.list li .ic-r { color: var(--acc); }
+  .quote { border-left: 4px solid var(--green); padding: 16px 24px; background: rgba(82,183,136,0.07); border-radius: 0 8px 8px 0; margin: 16px 0; max-width: 900px; }
+  .quote p { font-style: italic; color: var(--dark); margin-bottom: 0; }
+  .quote .attr { display: block; font-style: normal; font-size: 12px; color: var(--muted); margin-top: 10px; font-family: 'JetBrains Mono', monospace; }
+  .quote-yel { border-left-color: var(--yel); background: rgba(233,168,46,0.07); }
+  .stats { display: flex; gap: 36px; flex-wrap: wrap; margin-top: 20px; }
+  .stat .num { font-family: 'JetBrains Mono', monospace; font-size: clamp(30px,4.5vw,58px); font-weight: 800; color: var(--green); line-height: 1; }
+  .stat .lbl { font-size: 12px; color: var(--muted); margin-top: 6px; font-family: 'JetBrains Mono', monospace; }
+  .layer-num { font-family: 'Inter'; font-size: clamp(100px,14vw,180px); font-weight: 900; color: rgba(44,106,79,0.06); position: absolute; right: 80px; top: 50%; transform: translateY(-50%); line-height: 1; pointer-events: none; }
+  .demo-box { background: var(--dark); border-radius: 10px; padding: 22px 28px; max-width: 760px; margin-top: 14px; }
+  .demo-box .prompt { font-family: 'JetBrains Mono', monospace; font-size: 13px; color: rgba(245,241,235,0.4); margin-bottom: 10px; }
   .demo-box .response { font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--gl); line-height: 1.8; }
-  .demo-tag { display: inline-block; background: rgba(82,183,136,0.2); border: 1px solid var(--gl); color: var(--gl); font-family: 'JetBrains Mono', monospace; font-size: 12px; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; }
+  .demo-tag { display: inline-block; background: rgba(44,106,79,0.1); border: 1.5px solid var(--gl); color: var(--green); font-family: 'JetBrains Mono', monospace; font-size: 11px; padding: 4px 12px; border-radius: 20px; margin-bottom: 14px; font-weight: 700; }
+  .mono { font-family: 'JetBrains Mono', monospace; background: rgba(44,106,79,0.09); border: 1px solid rgba(44,106,79,0.2); color: var(--green); padding: 2px 8px; border-radius: 4px; font-size: 0.85em; }
   .week-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; width: 100%; max-width: 1100px; margin-top: 16px; }
-  .wc { background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 18px; }
-  .wc .wk { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--gl); margin-bottom: 8px; font-weight: 700; letter-spacing: 0.1em; }
-  .wc h5 { font-size: 14px; font-weight: 700; color: var(--beige); margin-bottom: 6px; }
-  .wc p { font-size: 12px; color: rgba(245,241,235,0.6); margin-bottom: 0; }
-  #prog { position: fixed; bottom: 0; left: 0; height: 3px; background: var(--gl); transition: width 0.3s ease; z-index: 100; }
-  #ctr { position: fixed; bottom: 20px; right: 32px; font-family: 'JetBrains Mono', monospace; font-size: 13px; color: rgba(255,255,255,0.3); z-index: 100; }
-  #ttl { position: fixed; bottom: 20px; left: 32px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: rgba(255,255,255,0.18); z-index: 100; max-width: 55vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .wc { background: var(--card); border: 2px solid var(--border); border-radius: 8px; padding: 18px; }
+  .wc .wk { font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--green); margin-bottom: 8px; font-weight: 700; letter-spacing: 0.1em; }
+  .wc h5 { font-size: 15px; font-weight: 700; color: var(--dark); margin-bottom: 6px; }
+  .wc p { font-size: 13px; color: var(--body); margin-bottom: 0; }
+  .ceo-quote { border-left: 5px solid var(--yel); padding: 20px 28px; background: white; border-radius: 0 10px 10px 0; box-shadow: 0 2px 16px rgba(0,0,0,0.06); max-width: 900px; }
+  .ceo-quote p { font-size: clamp(16px,2vw,25px); line-height: 1.5; color: var(--dark); font-style: italic; margin-bottom: 0; }
+  .ceo-quote .attr { display: block; font-style: normal; font-size: 12px; color: var(--muted); margin-top: 12px; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.05em; }
+  .ceo-quote-acc { border-left-color: var(--acc); }
+  #prog { position: fixed; bottom: 0; left: 0; height: 3px; background: var(--green); transition: width 0.3s ease; z-index: 100; }
+  #ctr { position: fixed; bottom: 20px; right: 32px; font-family: 'JetBrains Mono', monospace; font-size: 12px; color: var(--border); z-index: 100; }
+  #ttl { position: fixed; bottom: 20px; left: 32px; font-family: 'JetBrains Mono', monospace; font-size: 11px; color: var(--border); z-index: 100; max-width: 55vw; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
 </style>
 </head>
 <body>
 <div class="deck">
 
   <!-- 1. HOOK -->
-  <div class="slide bg-d active visible">
-    <div class="label">0:00 — Hook</div>
+  <div class="slide bg-base active visible">
+    <div class="label">Hook</div>
     <h1>I built an AI Operating System<br>that runs <span class="hi">80% of my business.</span></h1>
-    <p><span class="name">Liam Ottley</span> — multi-million pound AI agency. <span class="name">Jordan Platten</span> — multi-million pound empire. <strong style="color:var(--beige)">Both building toward this exact system.</strong></p>
-    <p>These are serious operators. Not influencers. The question isn't whether to build — it's whether you build <span class="hi">before your competitors do.</span></p>
+    <p><span class="name">Liam Ottley</span> — multi-million dollar AI agency. <span class="name">Jordan Platten</span> — multi-million dollar business empire. <strong style="color:var(--dark)">Both building toward this exact system.</strong></p>
+    <p>These are serious operators. The question isn't whether to build — it's whether you build <span class="hi">before your competitors do.</span></p>
   </div>
 
-  <!-- 1b. CEO QUOTE - SUNDAR (stakes) -->
-  <div class="slide bg-dd">
-    <div class="label ly">0:15 — Why This Matters</div>
-    <div class="quote" style="border-color:var(--yel); background:rgba(244,208,63,0.07); max-width:880px">
-      <p style="font-size:clamp(16px,2.1vw,26px); line-height:1.5">"I've always thought of AI as the most profound technology humanity is working on. <strong style="color:var(--yel)">More profound than fire or electricity</strong> or anything that we've done in the past."</p>
-      <span style="display:block; margin-top:12px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--yel); font-style:normal">Sundar Pichai — Google CEO, 60 Minutes 2023</span>
+  <!-- 2. CEO QUOTE — SUNDAR -->
+  <div class="slide bg-white">
+    <div class="label">Why Now</div>
+    <div class="ceo-quote">
+      <p>"I've always thought of AI as the most profound technology humanity is working on. <strong>More profound than fire or electricity</strong> or anything that we've done in the past."</p>
+      <span class="attr">Sundar Pichai — Google CEO, 60 Minutes 2023</span>
     </div>
-    <p style="margin-top:24px">If the CEO of Google is saying this — <span class="hi">now is the time to build.</span></p>
+    <p style="margin-top:28px">If the CEO of Google is saying this — <span class="hi">now is the time to build.</span></p>
   </div>
 
-  <!-- 2. LIVE DEMO - MORNING INTELLIGENCE -->
-  <div class="slide bg-demo">
-    <div class="label">0:30 — Live Demo</div>
-    <div class="demo-tag">▶ LIVE - Morning Intelligence (arrived 5am)</div>
+  <!-- 3. LIVE DEMO — MORNING INTELLIGENCE -->
+  <div class="slide bg-base">
+    <div class="label label-g">Live Demo</div>
+    <div class="demo-tag">▶ LIVE — Morning Intelligence</div>
     <div class="demo-box">
       <div class="prompt">JARVIS Morning Intelligence — 05:00</div>
       <div class="response">
-        MRR: £12,400 (+£800 MoM) — 1 failed payment: [client]<br>
+        MRR: $15,800 (+$960 MoM) — 1 failed payment: [client]<br>
         Today: 3 meetings — briefings prepared for each<br>
         Pipeline: 2 deals stale 7d — follow-up needed<br>
         Email: 14 unread — 3 require action today<br>
@@ -98,20 +118,20 @@
         Priority action: call [client] re failed payment
       </div>
     </div>
-    <p style="margin-top:16px; color:rgba(245,241,235,0.5); font-style:italic">Pulled from Stripe, Google Calendar, GHL, Gmail, Trello. While I was asleep.</p>
+    <p style="margin-top:16px; color:var(--muted); font-style:italic">Pulled from Stripe, Google Calendar, GHL, Gmail, Trello. While I was asleep.</p>
   </div>
 
-  <!-- 3. LIVE DEMO - MEETING PREP -->
-  <div class="slide bg-demo">
-    <div class="label">0:30 — Live Demo</div>
-    <div class="demo-tag">▶ LIVE - Meeting Prep</div>
+  <!-- 4. LIVE DEMO — MEETING PREP -->
+  <div class="slide bg-base">
+    <div class="label label-g">Live Demo</div>
+    <div class="demo-tag">▶ LIVE — Meeting Prep</div>
     <h3>I've got a call in an hour.</h3>
     <div class="demo-box">
       <div class="prompt">Rahul: Prep me for my 10am call with [client]</div>
       <div class="response">
         Contact: [Name], [Company] — client since Jan 2025<br>
         Last call: March 14 — discussed voice agent expansion<br>
-        Open deals: £2,400/mo renewal due this month<br>
+        Open deals: $2,880/mo renewal due this month<br>
         Fireflies summary: they asked about SMS follow-up feature<br>
         <br>
         Suggested talking points: renewal, SMS integration, upsell to System 4
@@ -120,41 +140,50 @@
     <p style="margin-top:14px">This is the architecture <span class="name">Liam Ottley</span> and <span class="name">Jordan Platten</span> have been building toward.</p>
   </div>
 
-  <!-- 4. THE FRANKENSTEIN PROBLEM -->
-  <div class="slide bg-r">
-    <div class="label la">2:30 — The Frankenstein Problem</div>
+  <!-- 5. WORK WITH ME CTA -->
+  <div class="slide bg-green">
+    <div class="label" style="color:rgba(255,255,255,0.55)">About Rahul</div>
+    <h2 style="color:white">My name's Rahul. I run a<br>6-figure AI Automation agency.</h2>
+    <p style="color:rgba(255,255,255,0.9)">My clients save <strong>15-20 hours every single week</strong> and <strong>tens of thousands of dollars a year</strong> with better AI systems.</p>
+    <p style="color:rgba(255,255,255,0.75); margin-top:4px">I document everything I build here.</p>
+    <p style="color:white; margin-top:20px; font-size:clamp(16px,1.9vw,22px)"><strong>Top link in description — free strategy call. Book it.</strong></p>
+  </div>
+
+  <!-- 6. THE FRANKENSTEIN PROBLEM -->
+  <div class="slide bg-base">
+    <div class="label label-a">The Frankenstein Problem</div>
     <h2>You've probably tried<br>building AI systems before.</h2>
     <p>One automation. Then another. Then a third. Suddenly you've got a <span class="ha">Frankenstein of disconnected tools</span> that breaks every time something changes.</p>
-    <ul class="list" style="max-width:820px; margin-top:14px">
-      <li><span class="ic" style="color:var(--acc)">✗</span> "The AI didn't have enough context."</li>
-      <li><span class="ic" style="color:var(--acc)">✗</span> "The workflow failed silently."</li>
-      <li><span class="ic" style="color:var(--acc)">✗</span> "It did the wrong thing because it didn't know about X."</li>
+    <ul class="list" style="margin-top:14px">
+      <li><span class="ic ic-r" style="color:var(--acc)">✗</span> "The AI didn't have enough context."</li>
+      <li><span class="ic ic-r" style="color:var(--acc)">✗</span> "The workflow failed silently."</li>
+      <li><span class="ic ic-r" style="color:var(--acc)">✗</span> "It did the wrong thing because it didn't know about X."</li>
     </ul>
     <p style="margin-top:16px">That's chaos with a fancy name. <span class="hi">It's not an AI Operating System.</span></p>
   </div>
 
-  <!-- 4b. CEO QUOTE - SATYA (SaaS collapse) -->
-  <div class="slide bg-r">
-    <div class="label la">2:30 — Why Your Software Stack is at Risk</div>
-    <div class="quote" style="border-color:var(--acc); background:rgba(231,111,81,0.07); max-width:880px">
-      <p style="font-size:clamp(15px,1.9vw,23px); line-height:1.5">"The notion that business applications exist — <strong style="color:var(--acc)">that's probably where they'll all collapse in the agent era.</strong> The business logic is all going to these agents."</p>
-      <span style="display:block; margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--acc); font-style:normal">Satya Nadella — Microsoft CEO, BG2 Podcast, December 2024</span>
+  <!-- 7. CEO QUOTE — SATYA -->
+  <div class="slide bg-white">
+    <div class="label label-a">Your Software Stack is at Risk</div>
+    <div class="ceo-quote ceo-quote-acc">
+      <p>"The notion that business applications exist — <strong>that's probably where they'll all collapse in the agent era.</strong> The business logic is all going to these agents."</p>
+      <span class="attr">Satya Nadella — Microsoft CEO, BG2 Podcast, December 2024</span>
     </div>
-    <p style="margin-top:20px">Your CRM. Your project management tool. Your content scheduler.<br><span class="ha">All of it will be replaced by agents that can do the work directly.</span></p>
+    <p style="margin-top:24px">Your CRM. Your project management tool. Your content scheduler.<br><span class="ha">All of it will be replaced by agents that do the work directly.</span></p>
   </div>
 
-  <!-- 5. THE PROMISE -->
-  <div class="slide bg-d">
-    <div class="label">3:30 — The Promise</div>
+  <!-- 8. THE PROMISE -->
+  <div class="slide bg-base">
+    <div class="label">The Promise</div>
     <h2>What I'm about to show you<br>is <span class="hi">different.</span></h2>
     <p>The exact architecture I use — borrowed from <span class="name">Liam Ottley</span> and <span class="name">Jordan Platten</span>, adapted for any business owner who wants AI running their operations.</p>
   </div>
 
-  <!-- 6. VIDEO ROADMAP -->
-  <div class="slide bg-dp">
-    <div class="label">4:00 — What You'll Learn</div>
-    <h2>In this video:</h2>
-    <ul class="list" style="max-width:900px">
+  <!-- 9. VIDEO ROADMAP -->
+  <div class="slide bg-base">
+    <div class="label">In This Video</div>
+    <h2>What you'll learn:</h2>
+    <ul class="list">
       <li><span class="ic">01</span> The 5 layers every AI OS needs — why most people only build 1</li>
       <li><span class="ic">02</span> How to give your AI real context so it stops making stupid mistakes</li>
       <li><span class="ic">03</span> The specific tools and integrations that make it work</li>
@@ -162,35 +191,26 @@
     </ul>
   </div>
 
-  <!-- 7. WORK WITH ME CTA -->
-  <div class="slide bg-g">
-    <div class="label" style="color:rgba(245,241,235,0.7)">2:00 — About Rahul</div>
-    <h2 style="color:white">My name's Rahul. I run a<br>6-figure AI Automation agency.</h2>
-    <p style="color:rgba(255,255,255,0.85)">My clients save <strong>15-20 hours every single week</strong> and <strong>tens of thousands of dollars a year</strong> with better AI systems.</p>
-    <p style="color:rgba(255,255,255,0.85); margin-top:12px">I document everything I build here.</p>
-    <p style="color:rgba(255,255,255,0.9); margin-top:16px"><strong>Top link in description — free strategy call. Book it.</strong></p>
-  </div>
-
-  <!-- 8. WHY MOST FAIL -->
-  <div class="slide bg-r">
-    <div class="label la">5:00 — Why Most AI Systems Fail</div>
+  <!-- 10. WHY MOST FAIL -->
+  <div class="slide bg-base">
+    <div class="label label-a">Why Most AI Systems Fail</div>
     <h2>Most people build<br><span class="ha">single-purpose bots.</span></h2>
-    <ul class="list" style="max-width:820px">
+    <ul class="list" style="margin-bottom:16px">
       <li><span class="ic" style="color:var(--acc)">✗</span> No shared context between automations</li>
       <li><span class="ic" style="color:var(--acc)">✗</span> Each tool operates in isolation</li>
       <li><span class="ic" style="color:var(--acc)">✗</span> When one thing changes, everything breaks</li>
     </ul>
-    <div class="quote" style="margin-top:20px; border-color:var(--yel); background:rgba(244,208,63,0.06)">
-      <p>"AI is not a tool. AI is work. AI is, in fact, <strong style="color:var(--yel)">workers that can actually use tools.</strong>"</p>
-      <span class="attr" style="color:var(--yel)">Jensen Huang — Nvidia CEO, GTC 2025</span>
+    <div class="quote quote-yel">
+      <p>"AI is not a tool. AI is work. AI is, in fact, workers that can actually use tools."</p>
+      <span class="attr">Jensen Huang — Nvidia CEO, GTC 2025</span>
     </div>
   </div>
 
-  <!-- 9. THE 5 LAYERS OVERVIEW -->
-  <div class="slide bg-n">
-    <div class="label">7:00 — The 5 Layers</div>
+  <!-- 11. THE 5 LAYERS OVERVIEW -->
+  <div class="slide bg-base">
+    <div class="label">The 5 Layers</div>
     <h2>5 layers. Most people<br>only build <span class="ha">1 or 2.</span></h2>
-    <ul class="list" style="max-width:900px">
+    <ul class="list">
       <li><span class="ic">1</span> <strong>Context OS</strong> — the foundation</li>
       <li><span class="ic">2</span> <strong>Data OS</strong> — the integrations</li>
       <li><span class="ic">3</span> <strong>Tool Harness</strong> — the capabilities</li>
@@ -200,30 +220,30 @@
     <p style="margin-top:16px"><span class="hi">That's why their systems break.</span></p>
   </div>
 
-  <!-- 10. LAYER 1 -->
-  <div class="slide bg-lyr" style="position:relative">
+  <!-- 12. LAYER 1 -->
+  <div class="slide bg-base" style="position:relative">
     <div class="layer-num">1</div>
-    <div class="label">7:30 — Layer 1</div>
+    <div class="label">Layer 1</div>
     <h2>Context OS</h2>
     <p>Your AI's memory and understanding of your business.</p>
-    <ul class="list" style="max-width:820px; margin-top:8px">
+    <ul class="list" style="margin-top:8px">
       <li><span class="ic">→</span> <span class="mono">claude.md</span> — 20-30 lines: who you are, what you do, how to behave</li>
       <li><span class="ic">→</span> <span class="mono">/context</span> — business, strategy, clients, SOPs</li>
       <li><span class="ic">→</span> <span class="mono">/memory</span> — persistent: feedback, preferences, past decisions</li>
     </ul>
     <div class="quote" style="margin-top:16px">
       <p>"Point, don't dump. Keep the main file lean — link to detailed docs."</p>
-      <span class="attr">— Liam Ottley</span>
+      <span class="attr">Liam Ottley</span>
     </div>
   </div>
 
-  <!-- 11. LAYER 2 -->
-  <div class="slide bg-lyr" style="position:relative">
+  <!-- 13. LAYER 2 -->
+  <div class="slide bg-base" style="position:relative">
     <div class="layer-num">2</div>
-    <div class="label">10:00 — Layer 2</div>
+    <div class="label">Layer 2</div>
     <h2>Data OS</h2>
     <p>All business data consolidated into one accessible layer.</p>
-    <ul class="list" style="max-width:820px; margin-top:8px">
+    <ul class="list" style="margin-top:8px">
       <li><span class="ic">→</span> Revenue from Stripe</li>
       <li><span class="ic">→</span> Calendar from Google</li>
       <li><span class="ic">→</span> Pipeline from CRM</li>
@@ -232,30 +252,30 @@
     <p style="margin-top:16px">The key: <span class="hi">live data, not stale exports.</span></p>
   </div>
 
-  <!-- 12. LAYER 3 -->
-  <div class="slide bg-lyr" style="position:relative">
+  <!-- 14. LAYER 3 -->
+  <div class="slide bg-base" style="position:relative">
     <div class="layer-num">3</div>
-    <div class="label">12:00 — Layer 3</div>
+    <div class="label">Layer 3</div>
     <h2>Tool Harness</h2>
     <p>Your AI's ability to take action.</p>
-    <ul class="list" style="max-width:820px; margin-top:8px">
+    <ul class="list" style="margin-top:8px">
       <li><span class="ic">→</span> MCP servers connecting to external tools</li>
       <li><span class="ic">→</span> n8n workflows for complex automations</li>
       <li><span class="ic">→</span> API wrappers for services without direct integration</li>
     </ul>
     <div class="quote" style="margin-top:16px">
       <p>"The tools we're using today will look primitive in 6 months. Build for flexibility."</p>
-      <span class="attr">— Jordan Platten</span>
+      <span class="attr">Jordan Platten</span>
     </div>
   </div>
 
-  <!-- 13. LAYER 4 -->
-  <div class="slide bg-lyr" style="position:relative">
+  <!-- 15. LAYER 4 -->
+  <div class="slide bg-base" style="position:relative">
     <div class="layer-num">4</div>
-    <div class="label">14:00 — Layer 4</div>
+    <div class="label">Layer 4</div>
     <h2>Intelligence Layer</h2>
     <p>Where <span class="hi">Claude Code</span> lives. Context + data + tools = decisions.</p>
-    <ul class="list" style="max-width:820px; margin-top:8px">
+    <ul class="list" style="margin-top:8px">
       <li><span class="ic">→</span> Prompt engineering for specific tasks</li>
       <li><span class="ic">→</span> Skill files for repeatable workflows</li>
       <li><span class="ic">→</span> Takes all layers and <span class="hi">actually thinks and executes</span></li>
@@ -263,13 +283,13 @@
     <p style="margin-top:16px"><span class="ha">Without the other layers:</span> chatbot. <span class="hi">With them:</span> operating system.</p>
   </div>
 
-  <!-- 14. LAYER 5 -->
-  <div class="slide bg-lyr" style="position:relative">
+  <!-- 16. LAYER 5 -->
+  <div class="slide bg-base" style="position:relative">
     <div class="layer-num">5</div>
-    <div class="label">16:00 — Layer 5</div>
+    <div class="label">Layer 5</div>
     <h2>Communication Layer</h2>
     <p>How you interact with your AI OS.</p>
-    <ul class="list" style="max-width:820px; margin-top:8px">
+    <ul class="list" style="margin-top:8px">
       <li><span class="ic">→</span> Telegram bot for mobile access anywhere</li>
       <li><span class="ic">→</span> Scheduled tasks that run without you</li>
       <li><span class="ic">→</span> Alerts when things need attention</li>
@@ -277,9 +297,9 @@
     <p style="margin-top:16px">The front door to your system. Make it <span class="hi">accessible, make it useful.</span></p>
   </div>
 
-  <!-- 15. MY EXACT SETUP -->
-  <div class="slide bg-n">
-    <div class="label">17:00 — My Exact Setup</div>
+  <!-- 17. MY EXACT SETUP -->
+  <div class="slide bg-white">
+    <div class="label">My Exact Setup</div>
     <h2>My exact tech stack.</h2>
     <div class="grid2">
       <div class="card">
@@ -288,7 +308,7 @@
       </div>
       <div class="card">
         <h4>MCP Servers</h4>
-        <p>Google Calendar, GHL, Stripe, Airtable, n8n, Trello, Notion.</p>
+        <p>Google Calendar, GHL, Stripe, n8n, Trello, Notion.</p>
       </div>
       <div class="card">
         <h4>7 Specialist Agents</h4>
@@ -296,42 +316,42 @@
       </div>
       <div class="card">
         <h4>Scheduler</h4>
-        <p>Cron + shell helpers. Morning Intelligence 5am daily. Weekly Content Planning Saturdays.</p>
+        <p>Morning Intelligence 5am daily. Weekly Content Planning Saturdays.</p>
       </div>
     </div>
   </div>
 
-  <!-- 16. HOW TO BUILD - 4 WEEKS -->
-  <div class="slide bg-d">
-    <div class="label">19:00 — How To Build Your Own</div>
+  <!-- 18. HOW TO BUILD — 4 WEEKS -->
+  <div class="slide bg-base">
+    <div class="label">How To Build Your Own</div>
     <h2>4 weeks to your own AI OS.</h2>
     <div class="week-grid">
       <div class="wc">
-        <div class="wk">WEEK 1</div>
+        <div class="wk">Week 1</div>
         <h5>Context Layer</h5>
         <p>claude.md, /context folder, 3-5 skill files. Test with real work.</p>
       </div>
       <div class="wc">
-        <div class="wk">WEEK 2</div>
+        <div class="wk">Week 2</div>
         <h5>Data Layer</h5>
         <p>Connect CRM, payments, calendar. Build live data queries.</p>
       </div>
       <div class="wc">
-        <div class="wk">WEEK 3</div>
+        <div class="wk">Week 3</div>
         <h5>Tool Layer</h5>
         <p>MCP servers, fallback helpers. First automated workflow end-to-end.</p>
       </div>
       <div class="wc">
-        <div class="wk">WEEK 4</div>
+        <div class="wk">Week 4</div>
         <h5>Communication Layer</h5>
         <p>Telegram interface. Scheduled tasks. Notifications. Go live.</p>
       </div>
     </div>
   </div>
 
-  <!-- 17. RESULTS -->
-  <div class="slide bg-dd">
-    <div class="label">22:00 — Results</div>
+  <!-- 19. RESULTS -->
+  <div class="slide bg-white">
+    <div class="label">Results</div>
     <h2>What changed after<br>implementing this.</h2>
     <div class="stats">
       <div class="stat"><div class="num">0m</div><div class="lbl">Morning prep (was 45m)</div></div>
@@ -342,42 +362,42 @@
     <p style="margin-top:24px">The real win: <span class="hi">removing cognitive load.</span> I wake up knowing exactly what needs attention.</p>
   </div>
 
-  <!-- 17b. CEO QUOTE - JENSEN (7.5M agents) -->
-  <div class="slide bg-dd">
-    <div class="label ly">22:00 — The Scale</div>
-    <div class="quote" style="border-color:var(--yel); background:rgba(244,208,63,0.06); max-width:880px">
-      <p style="font-size:clamp(15px,1.9vw,23px); line-height:1.5">"75,000 employees will be working with <strong style="color:var(--yel)">7.5 million digital agents.</strong>"</p>
-      <span style="display:block; margin-top:10px; font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--yel); font-style:normal">Jensen Huang — Nvidia CEO, GTC 2025 (Nvidia's own projections)</span>
+  <!-- 20. CEO QUOTE — JENSEN (7.5M agents) -->
+  <div class="slide bg-white">
+    <div class="label">The Scale</div>
+    <div class="ceo-quote">
+      <p>"75,000 employees will be working with <strong>7.5 million digital agents.</strong>"</p>
+      <span class="attr">Jensen Huang — Nvidia CEO, GTC 2025 (Nvidia's own projections)</span>
     </div>
     <p style="margin-top:24px">Every employee running 100 AI agents. That's not science fiction.<br><span class="hi">That's the operating model being built right now.</span></p>
-    <p>The founders who build their AI OS <span class="hi">today</span> are the ones positioned for <span class="hy">that world.</span></p>
+    <p>The founders who build their AI OS today are the ones <span class="hy">positioned for that world.</span></p>
   </div>
 
-  <!-- 18. VALUATION POINT -->
-  <div class="slide bg-dd">
-    <div class="label">22:00 — Results</div>
-    <div class="quote" style="border-color:var(--yel); background:rgba(244,208,63,0.06)">
+  <!-- 21. VALUATION POINT -->
+  <div class="slide bg-white">
+    <div class="label">The Bigger Picture</div>
+    <div class="quote quote-yel">
       <p>"When you build systems like this, your agency isn't a service business anymore. You're a tech-enabled business."</p>
-      <span class="attr" style="color:var(--yel)">— Jordan Platten</span>
+      <span class="attr">Jordan Platten</span>
     </div>
-    <p style="margin-top:20px"><span class="hy">Tech-enabled businesses</span> valued at <span class="hy">5-8x revenue</span> vs 3-5x EBITDA for service businesses.</p>
+    <p style="margin-top:24px"><span class="hy">Tech-enabled businesses</span> valued at <span class="hy">5-8x revenue</span> vs 3-5x EBITDA for service businesses.</p>
     <p>Claude Code isn't a coding tool — it's an <span class="hi">AI Operating System any founder can use.</span></p>
   </div>
 
-  <!-- 19. OUTRO -->
-  <div class="slide bg-g">
-    <div class="label" style="color:rgba(245,241,235,0.7)">24:00 — Outro</div>
+  <!-- 22. OUTRO -->
+  <div class="slide bg-green">
+    <div class="label" style="color:rgba(255,255,255,0.55)">Outro</div>
     <h2 style="color:white">Want to build an AI Operating<br>System for your business?</h2>
-    <p style="color:rgba(255,255,255,0.85)">Top link in description — book a free intro call.</p>
-    <p style="color:rgba(255,255,255,0.7); margin-top:8px">I'll walk through your setup and show you exactly where an AI OS has the biggest impact.</p>
-    <p style="color:rgba(255,255,255,0.6); margin-top:8px">No pressure. No fluff. Just a clear plan.</p>
-    <p style="margin-top:32px; font-family:'Caveat',cursive; font-size:28px; color:rgba(255,255,255,0.55)">Subscribe for more AI automation content.</p>
+    <p style="color:rgba(255,255,255,0.9)">Top link in description — book a free intro call.</p>
+    <p style="color:rgba(255,255,255,0.8); margin-top:8px">I'll walk through your setup and show you exactly where an AI OS has the biggest impact.</p>
+    <p style="color:rgba(255,255,255,0.7); margin-top:4px">No pressure. No fluff. Just a clear plan.</p>
+    <p style="margin-top:32px; font-family:'Caveat',cursive; font-size:30px; color:rgba(255,255,255,0.55)">Subscribe for more AI automation content.</p>
   </div>
 
 </div>
 
 <div id="prog"></div>
-<div id="ctr">1 / 23</div>
+<div id="ctr">1 / 22</div>
 <div id="ttl">How I Built an AI Operating System to Run My Business</div>
 
 <script>
